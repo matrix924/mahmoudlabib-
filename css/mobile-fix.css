@@ -1,0 +1,31 @@
+/* Mobile Carousel Fix */
+@media (max-width: 768px) {
+    .carousel-container {
+        max-width: 100%;
+        border-radius: 0;
+        /* Full width on mobile looks better without rounded corners sometimes, or keep them. Let's keep 15px but maybe reduce border width */
+        border-left: none;
+        border-right: none;
+        box-shadow: none;
+        background: transparent;
+        /* Remove black fallback if image covers */
+    }
+
+    .carousel-slide img {
+        height: auto !important;
+        /* Let image define height */
+        max-height: 500px;
+        /* Limit height */
+        object-fit: contain !important;
+        /* Ensure FULL image is visible. On mobile, seeing the text/details in transformation pics is crucial. */
+        border-radius: 10px;
+    }
+
+    /* Adjust dots position if image height varies */
+    .carousel-dots {
+        position: relative;
+        background: transparent;
+        margin-top: -10px;
+        padding-bottom: 20px;
+    }
+}

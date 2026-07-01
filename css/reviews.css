@@ -1,0 +1,122 @@
+/* Reviews Section */
+.reviews {
+    background-color: var(--bg-dark);
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.review-card {
+    background-color: var(--bg-card);
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    transition: var(--transition);
+}
+
+.review-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+.quote-icon {
+    font-size: 2rem;
+    color: rgba(253, 184, 19, 0.2);
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.stars {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.review-text {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    font-style: italic;
+    min-height: 80px;
+    color: #ddd;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* Right align for RTL context if needed, or flex-end implies left in LTR but we are RTL */
+    /* Since body is RTL, flex-end is LEFT. But details should be right. */
+    /* Let's verify layout. We want Avatar Left, Text Right. */
+    gap: 15px;
+}
+
+/* In RTL:
+   div uses flex. 
+   Avatar is last child.
+   Details is first child.
+   We want Avatar on the Left (end of line in RTL? No, start is Right).
+   In RTL: Start=Right, End=Left.
+   So flex-direction: row; means 1st item is Right. 
+   We put Details first (Right), Avatar last (Left).
+   So alignbox should be OK.
+*/
+
+
+.reviewer-avatar {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(253, 184, 19, 0.1);
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border: 1px solid var(--primary-color);
+}
+
+.reviewer-details {
+    text-align: left;
+    /* Name/Title align */
+}
+
+/* Adjust for RTL specifically if needed */
+/* Since dir="rtl" is on html:
+   'text-align: left' aligns to Left.
+   But we usually want Arabic text aligned Right.
+   So let's use text-align: right (default).
+*/
+.reviewer-details {
+    text-align: left;
+    /* Keep names next to avatar? No, usually right aligned in Arabic context. */
+    text-align: left;
+    /* Screenshot shows name next to avatar. If Avatar is Left, Name should be Right of Avatar (so Left aligned relative to card? No). */
+    /* Let's look at screenshot. 
+       Text is Right Aligned. 
+       Avatar is on the Right or Left? 
+       Screenshot: "Sarah Ali" title below. Avatar 'Seen' circle is on the Right.
+       Wait, let me look closer at screenshot.
+       Review 1: "Ahmed Mohamed". Circle 'Alif' is on the Right? No, looks like Left side of the text block?
+       Actually, standard Arabic UI: Avatar on Right, Text on Left of Avatar.
+       Let's stick to standard flex with RTL.
+       Items: Details, Avatar.
+       RTL: Details (Right), Avatar (Left). This matches "Avatar on Left".
+       Screenshot seems to have Avatar on the LEFT of the name.
+       So: [Name] [Avatar] <- This is RTL default if Avatar is 2nd child.
+       Wait, RTL flows Right to Left. 
+       Child 1 (Right), Child 2 (Left).
+       So if I want Avatar on Left, it should be Child 2.
+       Correct.
+       Text Alignment: The review text is Right aligned. The Name is Right Aligned (next to Avatar?).
+       Let's try standard and see.
+    */
+    text-align: left;
+}
+
+/* Creating helper to append */
